@@ -137,7 +137,6 @@ class XmlManifest(object):
     self.localManifestWarning = False
     self.isGitcClient = False
     self._load_local_manifests = True
-    print("globalConfig=%s" %self.globalConfig)
     self.repoProject = MetaProject(self, 'repo',
       gitdir   = os.path.join(repodir, 'repo/.git'),
       worktree = os.path.join(repodir, 'repo'))
