@@ -137,7 +137,7 @@ class XmlManifest(object):
     self.localManifestWarning = False
     self.isGitcClient = False
     self._load_local_manifests = True
-
+    print("globalConfig=%s" %self.globalConfig)
     self.repoProject = MetaProject(self, 'repo',
       gitdir   = os.path.join(repodir, 'repo/.git'),
       worktree = os.path.join(repodir, 'repo'))
@@ -697,6 +697,19 @@ class XmlManifest(object):
     if alias == '':
       alias = None
     fetch = self._reqatt(node, 'fetch')
+
+    #danny.fn add repo.user and repo.server
+    #[repo]
+		#	 user = admin
+		#	 server = 127.0.0.1
+    repouser=self.globalConfig.GetString('repo.user')
+    if repouser != '':
+    	fetch=fetch.replace('repouser',repouser)
+    reposerver=self.globalConfig.GetString('repo.server')
+    if reposerver != '':
+    	fetch=fetch.replace('reposerver',reposerver)
+    #danny.fn end
+
     pushUrl = node.getAttribute('pushurl')
     if pushUrl == '':
       pushUrl = None
