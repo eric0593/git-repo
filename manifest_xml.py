@@ -702,10 +702,10 @@ class XmlManifest(object):
 		#	 user = admin
 		#	 server = 127.0.0.1
     repouser=self.globalConfig.GetString('repo.user')
-    if repouser != '':
+    if not repouser is None:
     	fetch=fetch.replace('repouser',repouser)
     reposerver=self.globalConfig.GetString('repo.server')
-    if reposerver != '':
+    if not reposerver is None:
     	fetch=fetch.replace('reposerver',reposerver)
     #danny.fn end
 
