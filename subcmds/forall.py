@@ -172,6 +172,7 @@ without iterating through the remaining projects.
     return {
       'name': project.name,
       'relpath': project.relpath,
+      'upstream':project.upstream,
       'remote_name': project.remote.name,
       'lrev': lrev,
       'rrev': project.revisionExpr,
@@ -309,6 +310,11 @@ def DoWork(project, mirror, opt, cmd, shell, cnt, config):
     if hasattr(val, 'encode'):
       val = val.encode()
     env[name] = val
+  #danny add upstream here
+  upstream = project['upstream']
+  if not upstream is None:
+    x = upstream.rfind('/')
+    setenv('REPO_UPSTREAM', upstream[x+1:])
 
   setenv('REPO_PROJECT', project['name'])
   setenv('REPO_PATH', project['relpath'])
